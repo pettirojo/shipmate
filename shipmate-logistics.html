@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ShipMate© — Shipping &amp; logistics tracking</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--navy:#14213D;--gold:#FCA311;--lime:#B6FF00;--fg:#fff;--mute:#E5E5E5;--line:#2a3550;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme=light]{--bg:#fff;--navy:#E5E5E5;--fg:#000;--mute:#14213D;--line:#bbb}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#fff;--navy:#E5E5E5;--fg:#000;--mute:#14213D;--line:#bbb}}
+*{box-sizing:border-box;margin:0;border-radius:0}
+html{scroll-padding-top:70px}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.5 Archivo,Arial,sans-serif}
+h1,h2,h3,.d{font-family:Anton,Impact,"Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;line-height:.92}
+a{color:inherit}button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:2px solid var(--fg);display:flex;align-items:center;gap:16px;padding:10px 20px}
+.logo{font:400 28px Anton,Impact,sans-serif;text-decoration:none}.logo sup{font-size:12px;color:var(--gold)}
+nav{display:flex;gap:18px;margin-left:auto;align-items:center}nav a{text-decoration:none;font-size:14px;font-weight:500}nav a:hover{color:var(--gold)}
+.hb,.btn{background:var(--gold);color:#000;border:2px solid var(--gold);padding:10px 20px;font-weight:700;text-decoration:none;cursor:pointer;display:inline-block}
+.hb{background:none;color:var(--fg);border-color:var(--fg);padding:6px 12px}
+.btn:hover{background:var(--lime);border-color:var(--lime)}.btn.o{background:none;color:var(--fg);border-color:var(--fg)}.btn.o:hover{background:var(--lime);color:#000}
+.hero{display:grid;grid-template-columns:1.7fr 1fr;border-bottom:2px solid var(--fg)}
+.hero .l{background:var(--navy);padding:44px 24px;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(60px,12vw,170px)}.hero h1 span{color:var(--gold)}
+.px{position:absolute;right:0;top:0;width:150px;height:150px;background:conic-gradient(var(--gold) 25%,transparent 0 50%,var(--lime) 0 75%,transparent 0) 0 0/50px 50px}
+.hero p{max-width:48ch;margin:18px 0;color:var(--mute)}
+.tf{display:flex;gap:0;max-width:560px}.tf input{flex:1;min-width:0;background:var(--bg);border:2px solid var(--fg);border-right:0;padding:14px;font-size:18px}
+.hero .r{display:grid;grid-template-rows:1fr 1fr}.hero .r div{padding:22px 24px;display:flex;flex-direction:column;justify-content:flex-end;color:#000}
+.hero .r div:first-child{background:var(--gold);border-bottom:2px solid var(--fg)}.hero .r div:last-child{background:var(--lime)}.hero .r .d{font-size:64px}
+section,.page{padding:44px 20px;border-bottom:2px solid var(--fg)}
+h2{font-size:clamp(38px,6vw,76px);margin-bottom:22px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);border:2px solid var(--fg)}
+.steps div{padding:16px;border-right:2px solid var(--fg)}.steps div:last-child{border:0}.steps h3{font-size:26px;margin-bottom:6px}.steps p{font-size:14px;color:var(--mute)}
+.steps div:nth-child(5){background:var(--lime);color:#000}.steps div:nth-child(5) p{color:#000}
+.crumb{font-size:13px;color:var(--mute);margin-bottom:14px}
+.res{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--fg);margin-bottom:24px}
+.res>div{padding:18px;border-right:2px solid var(--fg);border-bottom:2px solid var(--fg)}.res .full{grid-column:1/-1;background:var(--navy);border-right:0}
+.res small,.k{color:var(--gold);font-size:13px;font-weight:700;display:block}
+.badge{display:inline-block;background:var(--gold);color:#000;padding:2px 12px;font:400 34px Anton,Impact,sans-serif;text-transform:uppercase}.badge.del{background:var(--lime)}
+.tl{list-style:none;padding:0;border-left:4px solid var(--line);margin-left:12px}
+.tl li{position:relative;padding:0 0 22px 28px;color:var(--mute)}
+.tl li:before{content:"";position:absolute;left:-14px;top:2px;width:24px;height:24px;border:3px solid var(--line);background:var(--bg)}
+.tl li.done:before{background:var(--gold);border-color:var(--gold);content:"✓";color:#000;text-align:center;font-weight:700;font-size:14px;line-height:18px}
+.tl li.cur:before{background:var(--lime);border-color:var(--lime);content:"●";color:#000;text-align:center;line-height:18px;font-size:12px}
+.tl li.done,.tl li.cur{color:var(--fg)}.tl h3{font-size:26px}.tl .m{font-size:14px}.tl .tag{font-size:12px;font-weight:700;color:var(--lime)}
+.pd{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border:2px solid var(--fg);margin:28px 0 20px}.pd>div{padding:14px 16px;border-right:2px solid var(--fg);border-bottom:2px solid var(--fg)}.pd .pic{background:var(--navy);display:grid;place-items:center;min-height:130px}.pd .box{width:70px;height:70px;border:4px solid var(--gold);position:relative}.pd .box:after{content:"";position:absolute;right:-14px;bottom:-14px;width:28px;height:28px;background:var(--lime)}.err{border:2px solid var(--gold);padding:18px;margin:14px 0;background:var(--navy)}
+label{display:block;font-size:14px;font-weight:700;margin:12px 0 4px}
+input,select,textarea{width:100%;background:var(--bg);border:2px solid var(--fg);padding:9px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;max-width:760px}.fg .w{grid-column:1/-1}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border:2px solid var(--fg);margin-bottom:20px}
+.stats div{padding:14px;border-right:2px solid var(--fg)}.stats .d{font-size:48px;display:block}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.bar input{flex:1;min-width:160px}.bar select{width:auto}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:640px}th,td{border:2px solid var(--fg);padding:8px 10px;text-align:left;font-size:14px}th{background:var(--navy)}
+tr.row{cursor:pointer}tr.row:hover td{background:var(--navy)}
+.pill{font-size:12px;font-weight:700;background:var(--gold);color:#000;padding:2px 8px}.pill.d5{background:var(--lime)}
+details{border:2px solid var(--fg);margin-bottom:-2px}summary{padding:14px;cursor:pointer;font-weight:700}details p{padding:0 14px 14px;color:var(--mute)}
+footer{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px;padding:36px 20px;background:var(--navy)}
+footer .big{font:400 clamp(54px,10vw,120px) Anton,Impact,sans-serif;line-height:.9}footer a{display:block;font-size:14px;text-decoration:none;color:var(--mute);padding:2px 0}footer a:hover{color:var(--gold)}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--gold);color:#000;padding:10px 18px;font-weight:700;display:none;z-index:50}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.steps div{border-right:0;border-bottom:2px solid var(--fg)}.res,.fg{grid-template-columns:1fr}footer{grid-template-columns:1fr}nav a.h{display:none}}
+</style></head><body>
+<header><a class="logo" href="#/">SHIPMATE<sup>©</sup></a>
+<nav aria-label="Primary"><a class="h" href="#/track">Track</a><a class="h" href="#/faq">Help</a><a class="h" href="#/contact">Contact</a><a href="#/admin" class="hb" id="lg">Staff login</a><button class="hb" id="th">Theme</button></nav></header>
+<main id="app"></main>
+<footer><div class="big">SHIPMATE©</div><div><b>Customers</b><a href="#/track">Track a shipment</a><a href="#/faq">Status guide</a><a href="#/contact">Contact support</a></div><div><b>Privacy</b><p style="font-size:14px;color:var(--mute)">Tracking details are shown only after the shipment password is entered.</p></div></footer>
+<div id="toast" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const ST=["Received","Processed","Ready for Shipment","Arrived","Delivered"];
+const DESC=["We have the package at the origin facility.","Logged, sorted and prepared for dispatch.","Packed and waiting for carrier pickup.","Reached the destination city or facility.","Handed to the recipient."];
+const TIME=["Same day","1 day","1–2 days","2–7 days, by route","Same day as arrival"];
+const SB_URL="https://xokrwhkqomymnxtmoqum.supabase.co",SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhva3J3aGtxb215bW54dG1vcXVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzNTIwMDcsImV4cCI6MjEwNjkyODAwN30.wnQNUBB6E8MymTIU0sanMKRgGh2l-ObzBP_VFJrrB-A";
+const sb=supabase.createClient(SB_URL,SB_KEY);
+let D=[],T={},ADM=false;
+const COLS="id,tracking_number,from_name,from_address,to_name,to_address,eta,weight,category,product_name,quantity,dimensions,service,created_at,shipment_events(status,location,note,created_by,created_at)";
+const adapt=s=>({id:s.id,t:s.tracking_number,fn:s.from_name,fa:s.from_address,tn:s.to_name,ta:s.to_address,eta:s.eta,w:s.weight,c:s.category,pn:s.product_name,q:s.quantity,d:s.dimensions,sv:s.service,ev:(s.shipment_events||s.events||[]).map(e=>({s:e.status,loc:e.location,note:e.note,ts:e.created_at,by:e.created_by||"system"})).sort((x,y)=>new Date(x.ts)-new Date(y.ts))});
+async function checkStaff(){try{const{data}=await sb.rpc("is_staff");ADM=data===true}catch(e){ADM=false}}
+async function loadAdmin(){const{data,error}=await sb.from("shipments").select(COLS).order("created_at",{ascending:false});if(error)return toast(error.message);D=data.map(adapt)}
+async function loadTrack(id){T={id};
+if(ADM){const{data}=await sb.from("shipments").select(COLS).eq("tracking_number",id).maybeSingle();T.exists=!!data;T.s=data?adapt(data):null;return}
+const{data:ex}=await sb.rpc("shipment_exists",{p_tracking:id});T.exists=ex;let pw=null;try{pw=sessionStorage.getItem("sm_pw_"+id)}catch(e){}
+if(ex&&pw){const{data}=await sb.rpc("track_shipment",{p_tracking:id,p_password:pw});T.status=data&&data.status;if(T.status=="ok")T.s=adapt(data.shipment);else{try{sessionStorage.removeItem("sm_pw_"+id)}catch(e){}}}}
+async function login(e){e.preventDefault();const{error}=await sb.auth.signInWithPassword({email:e.target.e.value,password:e.target.p.value});if(error){$("#le").style.display="block";return}await checkStaff();if(!ADM){await sb.auth.signOut();$("#le").style.display="block";return}location.hash="#/admin";route()}
+async function logout(){await sb.auth.signOut();ADM=false;D=[];location.hash="#/";route()}
+const $=s=>document.querySelector(s),cur=s=>s.ev[s.ev.length-1].s;
+const fmt=t=>new Date(t).toLocaleString([],{dateStyle:"medium",timeStyle:"short"});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(m){const e=$("#toast");e.textContent=m;e.style.display="block";clearTimeout(toast.x);toast.x=setTimeout(()=>e.style.display="none",2000)}
+const tf=(v="")=>`<form class="tf" onsubmit="event.preventDefault();location.hash='#/track/'+encodeURIComponent(this.q.value.trim().toUpperCase())"><input name="q" value="${esc(v)}" placeholder="Enter tracking number, e.g. SM-100234" aria-label="Tracking number" required list="rt"><button class="btn">Track</button></form><datalist id="rt">${recent().map(r=>`<option value="${r}">`).join("")}</datalist>`;
+
+
+function unlock(e,t){e.preventDefault();try{sessionStorage.setItem("sm_pw_"+t,e.target.pw.value.trim())}catch(x){}route()}
+function lockForm(t){const st=T.status;if(st=="locked")return`<div class="err" role="alert" style="margin-top:22px"><b>Too many incorrect attempts.</b> Details for ${esc(t)} are locked for 15 minutes. <a href="#/contact">Contact support</a> to get your password.</div>`;
+return`<div class="res" style="margin-top:22px"><div class="full"><small>Protected shipment</small><span class="badge">Password required</span><p>Enter the password you were given with ${esc(t)} to see its status and details.</p></div></div><form class="fg" style="max-width:420px;grid-template-columns:1fr" onsubmit="unlock(event,'${t}')"><label for="pw">Shipment password</label><input id="pw" name="pw" type="password" autocomplete="off" required>${st=="wrong_password"?`<div class="err" role="alert">Incorrect password. Please try again.</div>`:""}<br><button class="btn">Unlock details</button></form><p style="font-size:13px;color:var(--mute);margin-top:14px">Lost your password? <a href="#/contact">Contact support</a>.</p>`}
+function recent(){try{return JSON.parse(localStorage.getItem("sm_r")||"[]")}catch(e){return[]}}
+function addRecent(t){try{localStorage.setItem("sm_r",JSON.stringify([t,...recent().filter(x=>x!=t)].slice(0,5)))}catch(e){}}
+const V={
+home:()=>`<div class="hero"><div class="l"><div class="px"></div><h1>Where's<br>your <span>freight?</span></h1><p>Enter a tracking number to see exactly where your shipment is, from our dock to your door.</p>${tf()}</div><div class="r"><div><span class="d">5</span>Clear stages from received to delivered</div><div><span class="d">24/7</span>Tracking lookups, no account needed</div></div></div>
+<section><h2>Every shipment, five stages</h2><div class="steps">${ST.map((s,i)=>`<div><h3>${s}</h3><p>${DESC[i]}</p></div>`).join("")}</div></section>
+<section><h2>Service notice</h2><div class="err"><b>Coast route:</b> Road freight to Mombasa and Malindi is running on normal schedule.</div></section>`,
+track:id=>{id=decodeURIComponent(id||"");let h=`<div class="page"><p class="crumb"><a href="#/">Home</a> / Track${id?" / "+esc(id):""}</p><h2>Track shipment</h2>${tf(id)}`;
+if(!id)return h+`</div>`;const s=T.s;
+if(!T.exists)return h+`<div class="err" role="alert"><b>No shipment found for “${esc(id)}”.</b><br>Check the number for typos. Tracking numbers look like SM-100234. <a href="#/contact">Contact support</a> if it still fails.</div></div>`;
+if(!s)return h+lockForm(id)+`</div>`;addRecent(id);const c=ST.indexOf(cur(s)),last=s.ev[s.ev.length-1];
+h+=`<div class="res" style="margin-top:22px"><div class="full"><small>Current status</small><span class="badge ${c==4?"del":""}">${cur(s)}</span><p>${DESC[c]}</p></div>
+<div><small>Tracking number</small><b>${s.t}</b> <button class="hb" onclick="navigator.clipboard&&navigator.clipboard.writeText('${s.t}');toast('Tracking number copied')">Copy</button></div>
+<div><small>Estimated delivery</small>${c==4?"Delivered":new Date(s.eta).toLocaleDateString([],{dateStyle:"long"})}</div>
+<div><small>From</small>${esc(s.fn)}<br>${esc(s.fa)}</div><div><small>To</small>${esc(s.tn)}<br>${esc(s.ta)}</div>
+<div><small>Last updated</small>${fmt(last.ts)}</div><div><small>Need help?</small><a href="#/contact">Contact support about ${s.t}</a></div></div>
+<h3 style="font-size:36px;margin-bottom:16px">Timeline</h3><ol class="tl">${ST.map((n,i)=>{const e=s.ev.find(e=>ST[e.s]==n);const cl=i<c?"done":i==c?"cur":"";return`<li class="${cl}"><h3>${n}</h3>${e?`<div class="m">${fmt(e.ts)} · ${esc(e.loc)}<br>${esc(e.note)}</div>`:`<div class="m">Pending</div>`}<span class="tag">${i<c?"Completed":i==c?"Current stage":"Upcoming"}</span></li>`}).join("")}</ol>
+<h3 style="font-size:36px;margin-top:12px">Product details</h3><div class="pd"><div class="pic" aria-hidden="true"><div class="box"></div></div><div><small class="k">Item</small>${esc(s.pn||"Not provided")}</div><div><small class="k">Category</small>${esc(s.c||"Not provided")}</div><div><small class="k">Quantity</small>${esc(s.q||"Not provided")}</div><div><small class="k">Weight</small>${esc(s.w||"Not provided")}</div><div><small class="k">Dimensions</small>${esc(s.d||"Not provided")}</div><div><small class="k">Service</small>${esc(s.sv||"Not provided")}</div></div>
+<p class="sp" style="font-size:13px;color:var(--mute)">Times shown in your local timezone. Details are protected by your shipment password.</p></div>`;return h},
+faq:()=>`<div class="page"><p class="crumb"><a href="#/">Home</a> / Help</p><h2>Help &amp; status guide</h2>${ST.map((s,i)=>`<details><summary>${s}: what does it mean?</summary><p>${DESC[i]} Usual time: ${TIME[i]}.</p></details>`).join("")}<details><summary>My shipment looks delayed. What now?</summary><p>If a status has not changed after the usual time, contact support with your tracking number and we will check with the facility.</p></details><details><summary>Is my tracking information private?</summary><p>Every shipment has its own password. Without it, nobody can see the route, status, timeline or product details. Share it only with people you trust.</p></details><p style="margin-top:20px"><a class="btn" href="#/contact">Contact support</a></p></div>`,
+contact:()=>`<div class="page"><p class="crumb"><a href="#/">Home</a> / Contact</p><h2>Contact support</h2><div class="res" style="max-width:760px"><div><small>Email</small>support@shipmate.example</div><div><small>Phone</small>+254 700 000 000</div><div class="full"><small>Business hours</small>Monday–Saturday, 8:00–18:00 EAT</div></div>
+<form class="fg" onsubmit="event.preventDefault();toast('Message sent. We reply within one business day.');this.reset()"><div><label for="n">Name</label><input id="n" required></div><div><label for="e">Email</label><input id="e" type="email" required></div><div class="w"><label for="tn">Tracking number (optional)</label><input id="tn"></div><div class="w"><label for="m">Message</label><textarea id="m" rows="4" required></textarea></div><div class="w"><br><button class="btn">Send message</button> <a class="btn o" href="#/track">Back to tracking</a></div></form></div>`,
+login:()=>`<div class="page"><h2>Staff login</h2><form class="fg" style="max-width:420px;grid-template-columns:1fr" onsubmit="login(event)"><label for="e">Email</label><input id="e" name="e" type="email" required><label for="p">Password</label><input id="p" name="p" type="password" required><div class="err" id="le" role="alert" style="display:none">Email or password is incorrect.</div><br><button class="btn">Log in</button></form></div>`,
+admin:()=>{if(!ADM)return V.login();const cnt=ST.map((n,i)=>D.filter(s=>cur(s)==n).length);
+const q=(A.q||"").toLowerCase();const rows=D.filter(s=>(!A.f||cur(s)==A.f)&&(!q||(s.t+s.tn+s.fn+s.ta).toLowerCase().includes(q)));
+return`<div class="page"><p class="crumb"><a href="#/">Home</a> / Admin</p><h2>Dashboard</h2><div class="stats"><div><span class="d">${D.length}</span>Total</div>${ST.map((n,i)=>`<div><span class="d">${cnt[i]}</span>${n}</div>`).join("")}</div>
+<div class="bar"><input id="aq" placeholder="Search tracking number, recipient, origin" value="${esc(A.q||"")}" aria-label="Search shipments"><select id="af" aria-label="Filter status"><option value="">All statuses</option>${ST.map(s=>`<option ${A.f==s?"selected":""}>${s}</option>`).join("")}</select><a class="btn" href="#/new">Create shipment</a><button class="btn o" onclick="csv()">Export CSV</button><button class="btn o" onclick="logout()">Log out</button></div>
+<div class="wrap"><table><tr><th>Tracking</th><th>From</th><th>To</th><th>Status</th><th>Updated</th></tr>${rows.map(s=>`<tr class="row" tabindex="0" onclick="location.hash='#/ship/${s.t}'" onkeydown="if(event.key=='Enter')this.click()"><td><b>${s.t}</b></td><td>${esc(s.fn)}</td><td>${esc(s.tn)}</td><td><span class="pill ${cur(s)=="Delivered"?"d5":""}">${cur(s)}</span></td><td>${fmt(s.ev[s.ev.length-1].ts)}</td></tr>`).join("")||`<tr><td colspan="5">No shipments match. Clear the search or filter.</td></tr>`}</table></div></div>`},
+new:()=>!ADM?V.login():`<div class="page"><p class="crumb"><a href="#/admin">Admin</a> / New shipment</p><h2>Create shipment</h2><form class="fg" onsubmit="mk(event)"><div><label>From (sender or facility)</label><input name="fn" required></div><div><label>From address</label><input name="fa" required></div><div><label>To (recipient)</label><input name="tn" required></div><div><label>To address</label><input name="ta" required></div><div><label>Weight</label><input name="w" placeholder="e.g. 5 kg"></div><div><label>Item description</label><input name="pn" required></div><div><label>Category</label><input name="c"></div><div><label>Quantity</label><input name="q" type="number" min="1" value="1"></div><div><label>Dimensions</label><input name="d" placeholder="e.g. 40 × 30 × 20 cm"></div><div><label>Service</label><select name="sv"><option>Road freight</option><option>Express</option><option>Air freight</option></select></div><div><label>Estimated delivery</label><input name="eta" type="date" required></div><div><label>Tracking number (blank = auto)</label><input name="t"></div><div><label>Customer password (blank = auto)</label><input name="pw" minlength="6" placeholder="Min 6 characters"></div><div class="w"><label>Notes</label><textarea name="note" rows="2"></textarea></div><div class="w"><br><button class="btn">Create as Received</button> <a class="btn o" href="#/admin">Cancel</a></div></form></div>`,
+ship:id=>{if(!ADM)return V.login();const s=D.find(x=>x.t==id);if(!s)return`<div class="page"><div class="err">Shipment not found. <a href="#/admin">Back to admin</a></div></div>`;const c=ST.indexOf(cur(s));
+return`<div class="page"><p class="crumb"><a href="#/admin">Admin</a> / ${s.t}</p><h2>${s.t}</h2><div class="res"><div><small>From</small>${esc(s.fn)}, ${esc(s.fa)}</div><div><small>To</small>${esc(s.tn)}, ${esc(s.ta)}</div><div><small>Package</small>${esc(s.pn||"n/a")} × ${esc(s.q||1)} · ${esc(s.w||"n/a")}</div><div><small>Status</small><span class="badge ${c==4?"del":""}">${ST[c]}</span></div><div class="full" style="background:none"><small>Customer password (share with the recipient)</small><b>${esc(s.pw||"Not set")}</b></div></div>
+${c<4?`<h3 style="font-size:34px">Update status</h3><form class="fg" onsubmit="up(event,'${s.t}')"><div><label>Next status</label><select disabled><option>${ST[c+1]}</option></select></div><div><label>Location</label><input name="loc" required></div><div class="w"><label>Note</label><input name="note"></div><div class="w"><br><button class="btn">Confirm update to ${ST[c+1]}</button></div></form>`:`<p>Delivered. No further updates.</p>`}
+<h3 style="font-size:34px;margin:28px 0 10px">History</h3><div class="wrap"><table><tr><th>When</th><th>Status</th><th>Location</th><th>Note</th><th>By</th></tr>${s.ev.slice().reverse().map(e=>`<tr><td>${fmt(e.ts)}</td><td>${ST[e.s]}</td><td>${esc(e.loc)}</td><td>${esc(e.note)}</td><td>${esc(e.by)}</td></tr>`).join("")}</table></div><p style="margin-top:16px"><a class="btn o" href="#/track/${s.t}">View public page</a> <button class="btn o" onclick="print()">Print record</button></p></div>`}};
+let A={};
+async function mk(e){e.preventDefault();const f=Object.fromEntries(new FormData(e.target));const{data,error}=await sb.rpc("create_shipment",{p:f});if(error)return toast(error.message);alert("Created "+data.tracking_number+"\nCustomer password: "+data.password+"\n\nCopy it now. It cannot be viewed again.");location.hash="#/ship/"+data.tracking_number}
+async function up(e,t){e.preventDefault();const f=Object.fromEntries(new FormData(e.target));const{error}=await sb.rpc("add_event",{p_tracking:t,p_location:f.loc,p_note:f.note||""});if(error)return toast(error.message);toast("Status updated");route()}
+function csv(){const r=[["tracking","from","to","status","updated"],...D.map(s=>[s.t,s.fn,s.tn,cur(s),s.ev[s.ev.length-1].ts])].map(r=>r.map(v=>`"${v}"`).join(",")).join("\n");const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(r);a.download="shipments.csv";a.click()}
+async function route(fresh){const[,p,a]=location.hash.split("/");if(p=="track"&&a)await loadTrack(decodeURIComponent(a));if((p=="admin"||p=="ship")&&ADM&&fresh!==false)await loadAdmin();const v=({track:V.track,faq:V.faq,contact:V.contact,admin:V.admin,new:V.new,ship:V.ship})[p];$("#app").innerHTML=v?v(a):V.home();$("#lg").textContent=ADM?"Admin":"Staff login";window.scrollTo(0,0);
+const q=$("#aq");if(q){q.oninput=e=>{A.q=e.target.value;const p=e.target.selectionStart;route(false);const n=$("#aq");n.focus();n.setSelectionRange(p,p)};$("#af").onchange=e=>{A.f=e.target.value;route(false)}}}
+addEventListener("hashchange",()=>route());checkStaff().then(()=>route());
+$("#th").onclick=()=>{const r=document.documentElement;r.dataset.theme=getComputedStyle(r).getPropertyValue("--fg").trim()=="#000"?"dark":"light"};
+</script></body></html>
